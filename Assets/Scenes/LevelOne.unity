@@ -170,6 +170,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 242640883}
     m_Modifications:
     - target: {fileID: -9116526993486046889, guid: 8ad137f6808375f4e885d60451f0c4fc, type: 3}
+      propertyPath: wrongPanelAnimator
+      value: 
+      objectReference: {fileID: 658693866}
+    - target: {fileID: -9116526993486046889, guid: 8ad137f6808375f4e885d60451f0c4fc, type: 3}
       propertyPath: greenCrystalAnimator
       value: 
       objectReference: {fileID: 596703874}
@@ -485,6 +489,7 @@ MonoBehaviour:
   audioSourceElement: 2
   audioPlayer: {fileID: 0}
   greenCrystalAnimator: {fileID: 596703874}
+  wrongPanelAnimator: {fileID: 658693866}
 --- !u!1 &611972657
 GameObject:
   m_ObjectHideFlags: 0
@@ -1057,14 +1062,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0.11901831, y: -0, z: -0, w: 0.992892}
-  m_LocalPosition: {x: 0, y: 3.01, z: -10}
+  m_LocalRotation: {x: 0.30070576, y: 0, z: 0, w: 0.953717}
+  m_LocalPosition: {x: 0, y: 5.65, z: -9.16}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 13.671, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 35, y: 0, z: 0}
 --- !u!114 &963194229
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1535,7 +1540,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1456619304}
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 2.4556372, y: 20.292168, z: -33.8344}
+  m_LocalPosition: {x: 2.4556372, y: 20.29, z: -33.85}
   m_LocalScale: {x: 17, y: 1, z: 10}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2302,6 +2307,10 @@ PrefabInstance:
       propertyPath: m_Lightmapping
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 1402146407536825595, guid: f035235bfe0fb5d48b6f85818f4f000e, type: 3}
+      propertyPath: wrongPanelAnimator
+      value: 
+      objectReference: {fileID: 658693866}
     - target: {fileID: 1402146407536825595, guid: f035235bfe0fb5d48b6f85818f4f000e, type: 3}
       propertyPath: greenCrystalAnimator
       value: 
