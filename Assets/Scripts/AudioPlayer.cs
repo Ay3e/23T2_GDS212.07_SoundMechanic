@@ -9,13 +9,16 @@ public class AudioPlayer : MonoBehaviour
 
     [SerializeField] private GameObject blueCrystal;
     [SerializeField] private GameObject redCrystal;
+    [SerializeField] private GameObject greenCrystal;
 
-    private int amountOfAudioPlayed = 3;
-    private int crystalAvailableInLevel = 2;
+    //everytime 
+    public static int amountOfAudioPlayed = 3;
+    public static int crystalAvailableInLevel = 2;
     private int randomAudioNumber;
     private AudioSource playRandomAudioSource;
-    private int numberOfAudioPlayed;
     public static int[] generatedAudioNumbers; // New array to store generated randomAudioNumber values
+
+    public static bool audioSequenceIsPlaying = false;
 
     private void Start()
     {
@@ -23,6 +26,7 @@ public class AudioPlayer : MonoBehaviour
         PlayRandomAudio();
         blueCrystal.GetComponent<PlayerInputTracker>().enabled = false;
         redCrystal.GetComponent<PlayerInputTracker>().enabled = false;
+        greenCrystal.GetComponent<PlayerInputTracker>().enabled = false;
     }
 
     public void PlayRandomAudio()
@@ -32,14 +36,16 @@ public class AudioPlayer : MonoBehaviour
 
     private IEnumerator PlayRandomAudioWithDelay()
     {
-        for(int i = 0; i < crystalLights.Length; i++)
+        generatedAudioNumbers = new int[amountOfAudioPlayed];
+        audioSequenceIsPlaying = true;
+        for (int i = 0; i < crystalLights.Length; i++)
         {
             crystalLights[i].SetActive(false);
         }
         for (int i = 0; i < amountOfAudioPlayed; i++)
         {
-            numberOfAudioPlayed++;
             randomAudioNumber = Random.Range(0, crystalAvailableInLevel);
+            //Debug.Log(randomAudioNumber);
             generatedAudioNumbers[i] = randomAudioNumber;
             playRandomAudioSource = audioSource[randomAudioNumber];
 
@@ -57,9 +63,11 @@ public class AudioPlayer : MonoBehaviour
         }
         // After all audio is played, you can access the generatedAudioNumbers array to see all the randomAudioNumber values generated.
         // For example, you can use Debug.Log to display them:
+        audioSequenceIsPlaying = false;
         Debug.Log("All Random Audio Numbers Generated: " + string.Join(", ", generatedAudioNumbers));
         // And set all GameManagers to be on
         blueCrystal.GetComponent<PlayerInputTracker>().enabled = true;
         redCrystal.GetComponent<PlayerInputTracker>().enabled = true;
+        greenCrystal.GetComponent<PlayerInputTracker>().enabled = true;
     }
 }

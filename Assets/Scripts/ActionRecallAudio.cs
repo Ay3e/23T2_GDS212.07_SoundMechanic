@@ -11,6 +11,8 @@ public class ActionRecallAudio : MonoBehaviour
     private bool playerInsideTrigger;
     private bool isPlayingRandomAudio = false;
 
+    [SerializeField] private Animator greenCrystalAnimator;
+    [SerializeField] private Animator wrongPanelAnimator;
     private void Start()
     {
         // Get the reference to the AudioPlayer script attached to the GameObject
@@ -20,10 +22,12 @@ public class ActionRecallAudio : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        playerInsideTrigger = true;
-        crystalLights[audioSourceElement].SetActive(true);
+        if (AudioPlayer.audioSequenceIsPlaying != true)
+        {
+            playerInsideTrigger = true;
+            crystalLights[audioSourceElement].SetActive(true);
+        }
         Debug.Log("In Trigger " + audioSourceElement);
-       
     }
     private void OnTriggerExit(Collider other)
     {
@@ -32,15 +36,29 @@ public class ActionRecallAudio : MonoBehaviour
     }
     private void Update()
     {
+        // Checks everytime the player gets the whole sequence right
+        if (actionCounter >= AudioPlayer.generatedAudioNumbers.Length)
+        {
+            actionCounter = 0;
+            //When player gets it all right start a new sequence
+            AudioPlayer.amountOfAudioPlayed++;
+            //When player gets it all right start a new sequence
+            StartCoroutine(PlayRandomAudioAfterDelay());
+            if (AudioPlayer.amountOfAudioPlayed == 6)
+            {
+                // screen shake and animate a new crystal
+                ScreenShake.startShake = true;
+                greenCrystalAnimator.SetBool("Move", true);
+                AudioPlayer.crystalAvailableInLevel = 3;
+            }
+        }
         if (playerInsideTrigger && Input.GetKeyDown(KeyCode.E))
         {
-            if(actionCounter >= AudioPlayer.generatedAudioNumbers.Length)
-            {
-                actionCounter = 0;
-            }
             Debug.Log(actionCounter);
+            // Checks if player has interacted with the wrong crystal
             if (AudioPlayer.generatedAudioNumbers[actionCounter] != audioSourceElement)
             {
+                StartCoroutine(PlayPanelAnimationDelay());
                 // Check if we are already playing random audio to avoid overlapping calls
                 if (!isPlayingRandomAudio)
                 {
@@ -57,6 +75,14 @@ public class ActionRecallAudio : MonoBehaviour
             }
         }
     }
+    private IEnumerator PlayPanelAnimationDelay()
+    {
+        wrongPanelAnimator.SetBool("Play", true);
+
+        yield return new WaitForSeconds(2.5f);
+        wrongPanelAnimator.SetBool("Play", false);
+    }
+
     private IEnumerator PlayRandomAudioAfterDelay()
     {
         isPlayingRandomAudio = true;
@@ -72,7 +98,6 @@ public class ActionRecallAudio : MonoBehaviour
         // Play the random audio
         audioPlayer.PlayRandomAudio();
         
-
         // Reset the flag
         isPlayingRandomAudio = false;
     }
