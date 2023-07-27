@@ -5,12 +5,10 @@ using UnityEngine;
 public class AudioPlayer : MonoBehaviour
 {
     [SerializeField] private AudioSource[] audioSource;
+    [SerializeField] private GameObject[] crystalLights;
 
     [SerializeField] private GameObject blueCrystal;
     [SerializeField] private GameObject redCrystal;
-
-    [SerializeField] private GameObject blueLight;
-    [SerializeField] private GameObject redLight;
 
     private int amountOfAudioPlayed = 3;
     private int crystalAvailableInLevel = 2;
@@ -25,9 +23,6 @@ public class AudioPlayer : MonoBehaviour
         PlayRandomAudio();
         blueCrystal.GetComponent<PlayerInputTracker>().enabled = false;
         redCrystal.GetComponent<PlayerInputTracker>().enabled = false;
-
-        blueLight.SetActive(false);
-        redLight.SetActive(false);
     }
 
     public void PlayRandomAudio()
@@ -37,8 +32,10 @@ public class AudioPlayer : MonoBehaviour
 
     private IEnumerator PlayRandomAudioWithDelay()
     {
-        blueCrystal.GetComponent<PlayerInputTracker>().enabled = false;
-        redCrystal.GetComponent<PlayerInputTracker>().enabled = false;
+        for(int i = 0; i < crystalLights.Length; i++)
+        {
+            crystalLights[i].SetActive(false);
+        }
         for (int i = 0; i < amountOfAudioPlayed; i++)
         {
             numberOfAudioPlayed++;
@@ -54,6 +51,8 @@ public class AudioPlayer : MonoBehaviour
             // Get the AudioSource associated with the randomAudioNumber
             playRandomAudioSource = audioSource[randomAudioNumber];
 
+            crystalLights[randomAudioNumber].SetActive(true);
+
             // Play the selected random audio
             if (playRandomAudioSource != null)
             {
@@ -62,6 +61,7 @@ public class AudioPlayer : MonoBehaviour
 
             // Wait for 1.5 seconds before playing the next audio
             yield return new WaitForSeconds(1.5f);
+            crystalLights[randomAudioNumber].SetActive(false);
         }
         // After all audio is played, you can access the generatedAudioNumbers array to see all the randomAudioNumber values generated.
         // For example, you can use Debug.Log to display them:

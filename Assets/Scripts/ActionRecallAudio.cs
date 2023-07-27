@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ActionRecallAudio : MonoBehaviour
 {
+    [SerializeField] private GameObject[] crystalLights;
     [SerializeField] private int audioSourceElement;
     public static int actionCounter = 0;
     private AudioPlayer audioPlayer;
@@ -19,12 +20,14 @@ public class ActionRecallAudio : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         playerInsideTrigger = true;
+        crystalLights[audioSourceElement].SetActive(true);
         Debug.Log("In Trigger " + audioSourceElement);
        
     }
     private void OnTriggerExit(Collider other)
     {
         playerInsideTrigger = false;
+        crystalLights[audioSourceElement].SetActive(false);
     }
     private void Update()
     {
