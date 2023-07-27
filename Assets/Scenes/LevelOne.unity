@@ -276,6 +276,10 @@ PrefabInstance:
       propertyPath: m_Intensity
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 3084590053014984407, guid: 8ad137f6808375f4e885d60451f0c4fc, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8191690899722563013, guid: 8ad137f6808375f4e885d60451f0c4fc, type: 3}
       propertyPath: m_Enabled
       value: 0
@@ -1232,7 +1236,7 @@ GameObject:
   - component: {fileID: 1780886761}
   - component: {fileID: 1780886766}
   m_Layer: 0
-  m_Name: Capsule
+  m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

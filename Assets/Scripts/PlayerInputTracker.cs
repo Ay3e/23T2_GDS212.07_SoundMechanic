@@ -11,6 +11,7 @@ public class PlayerInputTracker : MonoBehaviour
 
     private void Start()
     {
+
         audioSource = GetComponent<AudioSource>();
     }
 

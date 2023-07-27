@@ -39,16 +39,8 @@ public class AudioPlayer : MonoBehaviour
         for (int i = 0; i < amountOfAudioPlayed; i++)
         {
             numberOfAudioPlayed++;
-            // Generate a random number between 0 (inclusive) and crystalAvailableInLevel (exclusive)
             randomAudioNumber = Random.Range(0, crystalAvailableInLevel);
-
-            // Ensure the randomAudioNumber is within the bounds of the audioSource array
-            randomAudioNumber = Mathf.Clamp(randomAudioNumber, 0, audioSource.Length - 1);
-
-            // Store the randomAudioNumber in the array
             generatedAudioNumbers[i] = randomAudioNumber;
-
-            // Get the AudioSource associated with the randomAudioNumber
             playRandomAudioSource = audioSource[randomAudioNumber];
 
             crystalLights[randomAudioNumber].SetActive(true);
